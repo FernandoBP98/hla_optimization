@@ -14,7 +14,7 @@ def read_file_excel(filename, size):
     """
 
     # Inicialización de estructura de datos
-    data = {'id': [], 'town': [], 'waste': [], 'distance': []}
+    data = {'id': [], 'town': [], 'waste': [], 'longitude': [], 'latitude': [], 'distance': []}
     file = openpyxl.load_workbook(filename)
 
     # Datos de residuos
@@ -33,6 +33,13 @@ def read_file_excel(filename, size):
         for j in range(i + 1, min(2 + size, sheet.max_row + 1)):
             ti, tj = i-1, j-1
             data['distance'][int(ti + ((tj - 2) * (tj - 1)) / 2) - 1] = float(sheet.cell(i, j).value)
+
+    # Datos de coordenadas
+    sheet = file['Coordenadas']
+
+    for i in range(2, min(2 + size, sheet.max_row + 1)):
+        data['latitude'].append(float(sheet.cell(i, 2).value))
+        data['longitude'].append(float(sheet.cell(i, 3).value))
 
     file.close()
 

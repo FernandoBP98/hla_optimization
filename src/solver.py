@@ -244,6 +244,7 @@ class HLASolver(object):
 
         # Representación
         self.graphbuilder.graph_history(self.solution_value_history, self.method)
+        self.graphbuilder.graph_groups(self.solution_groups, self.method)
 
     def set_timer(self, max_time):
         """

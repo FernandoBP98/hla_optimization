@@ -104,12 +104,10 @@ def cost_saving(optimizer, solution):
     # Selección de centros de transferencia
     transference_hubs = []
 
-    for _ in range(optimizer.max_hubs):
-        min_cost = min(total_costs)
-        min_idx = total_costs.index(min_cost)
-
-        transference_hubs.append(min_idx)
-        total_costs.pop(min_idx)
+    min_costs = sorted(total_costs)[:optimizer.max_hubs]
+    for cost in min_costs:
+        idx = total_costs.index(cost)
+        transference_hubs.append(idx)
 
     # Coste de envío desde todos los centros hasta centros de transferencia
     costs = {}
